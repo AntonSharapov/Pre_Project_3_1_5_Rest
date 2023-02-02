@@ -38,7 +38,7 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @Fetch(FetchMode.JOIN)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -46,12 +46,13 @@ public class User implements UserDetails {
 
     private Set<Role> roles = new HashSet<>();
 
-    public User(String name, String lastName, int age, String email, String password) {
+    public User(String name, String lastName, int age, String email, String password, Set<Role> roles) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
 
     @Override
